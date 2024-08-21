@@ -174,17 +174,51 @@ alias jctl 'journalctl -p 3 -xb'
 # Recent installed packages
 alias rip 'expac --timefmt="%Y-%m-%d %T" "%l\t%n %v" | sort | tail -200 | nl'
 
-## Run fastfetch if session is interactive
-if status --is-interactive && type -q fastfetch
-   fastfetch --config neofetch.jsonc
-end
+# Run fastfetch if session is interactive
+#if status --is-interactive && type -q fastfetch
+#    if test -e ~/.config/fish/logos
+#        fastfetch --list-logos | sed 's/\d.*) //g' | sed -E '/small/ d; s/^[0-9]+\)\s+"?([^"]+)"?.*/\1/' > ~/.config/fish/logos
+#    end
 
-function clear_thing 
+#    set logo (cat ~/.config/fish/logos | shuf | head -n 1)
+
+
+#       fastfetch -l $logo --config neofetch.jsonc
+#end
+
+function clear_thing
 	commandline "";
 	commandline -f repaint;
 	commandline  -f execute;
 end
 bind \cc clear_thing
 bind \cu tmux
-bind \cf fa 
-bind \cp ~/.scripts/tmux-sessionizer
+#tmux
+
+export FZF_DEFAULT_COMMAND='fd --type f --strip-cwd-prefix'
+function fzf_nvim
+    set file (find ~ -name 'Cache' -prune -o -name 'cache' -prune -o -name 'node_modules' -prune -o -name '.git' -prune -o -name 'dir2_to_ignore' -prune -o -type f -print | fzf)
+    if test -n "$file"
+        nvim $file
+    end
+end
+
+set -gx MCFLY_RESULTS 3000
+set -gx MCFLY_DELETE_WITHOUT_CONFIRM true
+set -gx MCFLY_KEY_SCHEME vim
+set -gx MCFLY_RESULTS_SORT rank
+
+
+
+bind \cp up-or-search
+#bind \co fzf_nvim
+# bind \cf tmux-sessionizer
+bind \cn nvim $pwd
+
+alias clip 'wl-copy'
+alias sq 'sqlite3'
+
+alias air '/bin/bash air'
+
+#tmux > /dev/null 2>&1
+

@@ -1,7 +1,7 @@
 {
     "layer": "top", // Waybar at top layer
-    "position": "top", // Waybar position (top|bottom|left|right)
-    "height": 40,
+    "position": "bottom", // Waybar position (top|bottom|left|right)
+    "height": 20,
     "width":1900,
     "margin": "0 0 0 0",
     "spacing":0,
@@ -171,6 +171,6 @@
         "exec": "curl 'https://wttr.in/?format=1'",
         "interval": 900,
 	    "on-click": "yad --html --uri='https://wttr.in/' --center --fixed --width=1000 --height=680 --timeout=60 --timeout-indicator=right"
-        // Please don't change it to any special location, let the user do it by themselves 
+        // Please don't change it to any special location, let the user do it by themselves
         },
     }
